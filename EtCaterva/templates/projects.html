@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Esta es nuestra <span style="color:#08a5ff;">coleccion software</span>, disfrutala!.</h1>
+    <div class="dotted_line"></div>
+    <!-- Begin top content -->
+  	<div id="top_content">
+  		<div id="top_content_portfolio">
+
+	  		<h2>Coleccion</h2>
+            <table border="0" cellspacing="8">
+    <!--<?php
+	$conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
+	mysql_select_db("db384496120"); 
+	$resQuery = mysql_query("Select * from Projects", $conexion) or die(mysql_error());
+	for ($j = 1; $j <= 3; $j++) {
+		echo "<tr>";
+		for ($i = 1; $i <= 5; $i++) {
+				if(!($row = mysql_fetch_assoc($resQuery)))
+    			    ;/*echo "<td><a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto\" class=\"zoom\"><img src=\"images/pic1_portfolio.jpg\" alt=\"Empty\" border=\"0\" /></a><br />Empty, <strong>----</strong><br /><a href=\"#\">Empty</a></td>";*/
+				else
+				{
+					echo "<td width='176' valign='top'><a href=\"project.php?id=".$row["idproject"]."\" class=\"zoom\">";
+					echo "<img src='/scripts/timthumb.php?src=images/Projects/".$row["image"]."&h=100&w=176&zc=1'";
+					echo "alt='".$row["name"]."' border=\"0\" /></a><br />".$row["name"];
+					echo ", <strong>".substr($row['date'],0,4)."</strong><br />";
+					$users = mysql_query("Select u.iduser, u.nick from Users u, User_has_Project p2u where ".$row["idproject"]." = p2u.Projects_idproject and u.iduser = p2u.Users_iduser", $conexion);
+					$row = mysql_fetch_assoc($users);
+					echo "<a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
+					while($row = mysql_fetch_assoc($users))
+					{
+						echo ", <a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
+					}
+					echo "</td>";
+				}
+		}
+		echo "</tr>";
+	}
+    ?>-->
+
+</table>
+  	  </div>
+  	</div>
+    <!-- End top content -->
+    <div class="clear"></div>
+    <div class="dotted_line"></div>
+    <!-- Begin bottom content -->
+    <div id="bottom_content">
+
+    	<div id="bottom_content_left_coloumn_latest_projects">
+        	<h2>Proyectos mas visitados</h2>
+    <!--<?php
+	$resQuery = mysql_query("Select * from Projects ORDER BY visits DESC", $conexion) or die(mysql_error());
+	for ($j = 1; $j <= 6; $j++) {
+			if(!($row = mysql_fetch_assoc($resQuery)))
+   			    ;/*echo "<a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto[pp_gal]\"><img src=\"images/pic2.jpg\" width=\"88\" height=\"88\" alt=\"pic2\" border=\"0\" /></a>";*/
+			else
+			{
+				echo "<a href=\"project.php?id=".$row["idproject"]."\" title=\"".$row["name"]."\">";
+				echo "<img src='/scripts/timthumb.php?src=images/Projects/".$row["image"]."&h=88&w=88&zc=1' width=\"88\" height=\"88\" alt=\"".$row["name"]."\" border=\"0\" /></a>";
+			}
+	}
+    ?>	-->
+        </div>
+		<div id="bottom_content_mid_coloumn">
+        	<h2>Comparte</h2>
+            <img src="../static/images/blockquote.png" width="40" height="33" alt="Blockquote" /><p>Aqui podras disfrutar de una gran colección de software a medida, la cual puede solucionar alguno de tus problemas. Pero si te ves capaz de crear contenido, registrate y sube tus creaciones. Ayuda a la comunidad a seguir creciendo!.<br /><span class="name">EtCaterva, Grupo Software</span></p>
+      	</div>
+		<div id="bottom_content_right_coloumn">
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 300,
+  height: 170,
+  theme: {
+    shell: {
+      background: '#adadad',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#000000',
+      links: '#00d9ff'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    behavior: 'all'
+  }
+}).render().setUser('EtCaterva').start();
+</script>
+    </div>
+    <!-- End bottom content -->
+    <div class="clear"></div>
+    <div class="dotted_line"></div>
+{% endblock %}

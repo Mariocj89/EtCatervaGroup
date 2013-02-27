@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Estos son los miembros de nuestro equipo, conocelos!.</h1>
+    <div class="dotted_line"></div>
+    <!-- Begin top content -->
+  	<div id="top_content">
+  		<div id="top_content_portfolio">
+
+	  		<h2>Equipo EtCaterva</h2>
+            <table border="0" cellspacing="8">
+    <!--<?php
+	$conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
+	mysql_select_db("db384496120"); 
+	$resQuery = mysql_query("Select * from Users", $conexion) or die(mysql_error());
+	for ($j = 1; $j <= 3; $j++) {
+		echo "<tr>";
+		for ($i = 1; $i <= 5; $i++) {
+				if(!($row = mysql_fetch_assoc($resQuery)))
+    			    ;/*echo "<td><a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto\" class=\"zoom\"><img src=\"images/pic1_portfolio.jpg\" alt=\"Empty\" border=\"0\" /></a><br />Empty, <strong>----</strong><br /><a href=\"#\">Empty</a></td>";*/
+				else
+				{
+					echo "<td width='176'><a href=\"user.php?id=".$row["iduser"]."\" class=\"zoom\">";
+					echo "<img src='/scripts/timthumb.php?src=images/Users/".$row["image"]."&h=100&w=176&zc=1'";
+					echo "alt=\"".$row["nick"]."\" border=\"0\" /></a><br />".$row["nick"];
+					echo ", <strong>".substr($row['registered'],0,4)."</strong><br />";
+					echo "</td>";
+				}
+		}
+		echo "</tr>";
+	}
+    ?>-->
+
+</table>
+  	  </div>
+  	</div>
+    <!-- End top content -->
+    <div class="clear"></div>
+    <div class="dotted_line"></div>
+    <!-- Begin bottom content -->
+    <div id="bottom_content">
+
+    	<div id="bottom_content_left_coloumn_latest_projects">
+        	<h2>Ultimos Usuarios</h2>
+   <!-- <?php
+	$resQuery = mysql_query("Select * from Users ORDER BY registered DESC", $conexion) or die(mysql_error());
+	for ($j = 1; $j <= 6; $j++) {
+			if(!($row = mysql_fetch_assoc($resQuery)))
+   			    ;/*echo "<a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto[pp_gal]\"><img src=\"images/pic2.jpg\" width=\"88\" height=\"88\" alt=\"pic2\" border=\"0\" /></a>";*/
+			else
+			{
+				echo "<a href=\"user.php?id=".$row["iduser"]."\" title=\"".$row["nick"]."\">";
+				echo "<img src='/scripts/timthumb.php?src=images/Users/".$row["image"]."&h=88&w=88&zc=1' width=\"88\" height=\"88\" alt=\"".$row["nick"]."\" border=\"0\" /></a>";
+			}
+	}
+	mysql_close($conexion);
+    ?>-->	
+        </div>
+		<div id="bottom_content_mid_coloumn">
+        	<h2>Contacta</h2>
+            <img src="../static/images/blockquote.png" width="40" height="33" alt="Blockquote" /><p>No dudes en contactar con el equipo si tienes cualquier duda o sugerencia!<br /><span class="name">EtCaterva, Grupo Software</span></p>
+      	</div>
+		<div id="bottom_content_right_coloumn">
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 300,
+  height: 170,
+  theme: {
+    shell: {
+      background: '#adadad',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#000000',
+      links: '#00d9ff'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    behavior: 'all'
+  }
+}).render().setUser('EtCaterva').start();
+</script>
+
+    </div>
+    <!-- End bottom content -->
+    <div class="clear"></div>
+    <div class="dotted_line"></div>
+{% endblock %}    

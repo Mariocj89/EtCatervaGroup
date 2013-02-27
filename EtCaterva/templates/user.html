@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<style type="text/css">
+	#box{width:180px;border:1px solid #000;height:17px;}
+	#bar{background:url("images/bar.png");height:14px;color:#000;text-align:right;padding:3px 0px 0px 0px;}
+	</style>	
+    <div class="clear"></div>
+    <!-- Begin bottom content -->
+    <div id="bottom_content">
+		<div id="bottom_content_left_coloumn">
+			<br><br>
+			<table border="0">
+			<!--<?php
+				function CalculaEdad( $fecha ) {
+					list($Y,$m,$d) = explode("-",$fecha);
+					return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
+				}
+			
+				if($_GET["id"])
+					$id = $_GET["id"];
+				else
+					{echo "Usuario Incorrecto"; die();}
+				$conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
+				mysql_select_db("db384496120"); 
+				$resQuery = mysql_query("Select * from Users where iduser=".$id, $conexion) or die(mysql_error());
+				$resQueryProj = mysql_query("Select * from Projects,User_has_Project where idproject=Projects_idproject and Users_iduser=".$id." ORDER BY date", $conexion);
+				$resQueryTotalProj = mysql_query("Select idproject from Projects", $conexion);
+				$resQueryProjVisit = mysql_query("Select * from Projects,User_has_Project where idproject=Projects_idproject and Users_iduser=".$id." ORDER BY visits", $conexion);				
+				$resQueryVisit = mysql_query("Select SUM(visits) as sum from Projects,User_has_Project where idproject=Projects_idproject and Users_iduser=".$id, $conexion);
+				$resQueryTotalVisit = mysql_query("Select SUM(visits) as sum from Projects", $conexion);				
+								
+				$resQueryNews = mysql_query("Select * from News where Users_iduser=".$id." ORDER BY date", $conexion);
+				$user = mysql_fetch_assoc($resQuery);
+				echo	"<tr><td align='right' colspan='4'><img src='/scripts/timthumb.php?src=images/Users/".$user["image"]."&h=250&w=250&zc=1' border='0' align='center'/>";
+				//echo	"<tr><td width='50'><img src='images/awards/mas_visitas.png' width='50' align='center' alt='Proyectos con más visitas 2011'/>";
+				//echo	"	<td width='50'><img src='images/awards/mas_noticias.png' width='50' align='center' alt='Usuario con más noticias 2011'/>
+				//		<td >
+				//		<td >
+				echo "<tr><td colspan='4'><h2>Participacion</h2></td></tr>";
+				$porcProj = round(mysql_num_rows($resQueryProj)*100/mysql_num_rows($resQueryTotalProj));
+				$aux1 = mysql_fetch_assoc($resQueryVisit);
+				$aux2 = mysql_fetch_assoc($resQueryTotalVisit);
+				$porcVisit = round($aux1["sum"]*100/$aux2["sum"]);
+				echo "<tr><td>Proyectos<td colspan='3'>
+				<div id='box'>
+						<div id='bar' style='width: ".$porcProj."%;'>".$porcProj."%</div>
+						</div>";
+						
+				echo "<tr><td>Visitas<td colspan='3'>
+				<div id='box'>
+						<div id='bar' style='width: ".$porcVisit."%;'>".$porcVisit."%</div>
+						</div>";
+				
+				
+				echo "<tr><td colspan='4'><h2>Links</h2><tr>";
+				if($user["facebook"])
+					echo "<td><a target='blank' href='https://www.facebook.com/".$user["facebook"]."'><img src='images/icons/facebook_32.png' width='28' height='28' alt='Facebook icon' border='0' /></a>";
+				
+				if($user["linkedin"])
+					echo "<td><a target='blank' href='https://www.linkedin.com/in/".$user["linkedin"]."'><img src='images/icons/linkedin_32.png' width='32' height='32' alt='Linked in icon' border='0' /></a>";
+				
+				if($user["twitter"])
+					echo "<td><a target='blank' href='https://twitter.com/#!/".$user["twitter"]."'><img src='images/icons/twitter_32.png' width='28' height='28' alt='Twitter icon' border='0' /></a>";
+				echo "</table></div>";
+				
+				
+				echo "<div id='bottom_content_mid_coloumn'>";
+				echo 	"<h2>".$user["nick"]."</h2>";
+
+				
+				echo	"<table border='0' cellpadding='5' cellspacing=''>";
+				echo	"<tr><td align='right'><b>Nombre:</b><td>".$user["name"];
+				echo	"<tr><td align='right'><b>Apellidos:</b><td>".$user["surname"];
+				echo	"<tr><td align='right'><b>Edad:</b><td>".CalculaEdad($user["birth"]);
+				echo	"<tr><td align='right'><b>F. Ingreso:</b><td>".date("m.d.y",strtotime($user["registered"]));
+				echo	"<tr><td align='right'><b>F. Nacimiento:</b><td>".date("m.d.y",strtotime($user["birth"]));
+				echo	"<tr><td colspan='2' align='center'><b>Descripcion:</b>
+					<tr><td colspan='2'>".$user["descr"];
+				echo	"</table>
+				</div>
+				<div id='bottom_content_right_coloumn'>
+					<h2>Estadisticas</h2>
+					<table border='0' cellpadding='5' cellspacing=''>
+					<tr><td align='right'><b>Num. Proyectos:</b><td>".mysql_num_rows($resQueryProj);
+				echo	"<tr><td align='right'><b>Num. Noticias:</b><td>".mysql_num_rows($resQueryNews);
+				$proj = (mysql_fetch_assoc($resQueryProj));
+				$news = (mysql_fetch_assoc($resQueryNews));
+				echo	"<tr><td align='right'><b>Ultima Noticia:</b><td>".$news["title"];	
+				echo	"<tr><td align='right'><b>Ultimo Proyecto:</b><td><a href='project.php?id=".$proj["idproject"]."'> ".$proj["name"]."</a>";
+				echo	"<tr><td align='right'><b>Fecha Ult. Proyecto:</b><td>".date("m.d.y",strtotime($proj["date"]));
+				$projV = (mysql_fetch_assoc($resQueryProjVisit));
+				echo	"<tr><td align='right'><b>Proyecto mas visitado:</b><td>".$projV["name"];
+				echo	"<tr><td colspan='2' align='center'><b>Proyectos:</b>
+					<tr><td colspan='2'><a href='project.php?id=".$proj["idproject"]."'>".$proj["name"]."</a>";
+				while($proj = (mysql_fetch_assoc($resQueryProj)))
+					{echo ",<a href='project.php?id=".$proj["idproject"]."'> ".$proj["name"]."</a>";}
+			?>-->
+			</table>
+		</div>
+    </div>
+
+    <!-- End bottom content -->
+    <div class="clear"></div>
+	<br><br><br><br><br><br>
+    <div class="dotted_line"></div>
+{% endblock %}

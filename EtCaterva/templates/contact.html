@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Por favor, <span style="color:#08a5ff;">contactanos</span>! Hablaremos sobre tus necesidades.</h1>
+    <div class="dotted_line"></div>
+	<!-- Begin content -->
+    <div id="content">
+		<div id="contact_us_left_coloumn">
+   		  <h2>Contacta con nosotros</h2>
+            <p>En esta pagina web abogamos por el entendimiento y el contacto con los usuarios. Por ello, si tienes alguna peticion o sugerencia, no dudes en hacernosla llegar. En Etcaterva.com mejoramos gracias a ti.
+            Para ellos ponemos a tu disposicion un formulario mediante el cual contactar con nosotros. Te responderemos en cuanto nos sea posible.
+            </p>
+			<table width="500" border="0">
+				<form action="contact.php" method=post>
+  				<tr>
+    				<td width="187">Nombre:</td>
+    				<td width="299">
+				<input name="your_name" type="text" size="30" /></td>
+  				</tr>
+  				<tr>
+   					<td>Email:</td>
+    				<td><input name="your_email" type="text" size="30" /></td>
+  				</tr>
+  				<tr>
+    				<td>Asunto:</td>
+    				<td><input name="subject" type="text" size="30" /></td>
+  				</tr>
+ 				<tr>
+    				<td>Mensaje:</td>
+    				<td><textarea name="message" cols="45" rows="8"></textarea></td>
+  				</tr>
+                <tr>
+    				<td></td>
+    				<td><input name="submit" type="submit" class="submit_button" value="Enviar" /><input name="reset" type="reset" class="reset_button" value="Limpiar" /></td>
+  				</tr>
+                         </form>
+			</table>
+			<br />
+   	 	</div>
+
+<!-- <?php 
+
+    if ($HTTP_POST_VARS){
+
+    $header  = "MIME-Version: 1.0 \r\n";
+    $header .= "Content-type: text/html; charset=utf-8 \r\n";  
+    $nopermitidos = array("'",'\\','<','>',"\"");
+    $HTTP_POST_VARS["your_name"] = str_replace($nopermitidos, "", $HTTP_POST_VARS["your_name"]);
+    $HTTP_POST_VARS["your_email"] = str_replace($nopermitidos, "", $HTTP_POST_VARS["your_email"]);
+    $HTTP_POST_VARS["subject"] = str_replace($nopermitidos, "", $HTTP_POST_VARS["subject"]);
+    $HTTP_POST_VARS["message"] = str_replace($nopermitidos, "", $HTTP_POST_VARS["message"]);
+    
+    
+    $cuerpo =  "
+    <html>
+    <title> Formulario WEB </title>
+    <body>
+    ## Formulario recibido ##<br>
+    -- Cabecera -----------------------------------<br>
+    -<b>Nombre:</b> " . $HTTP_POST_VARS["your_name"] . "<br>
+    -<b>Email: </b>&nbsp;" . $HTTP_POST_VARS["your_email"] . "<br>
+    -<b>Asunto:</b> " . $HTTP_POST_VARS["subject"] . "<br>
+    -----------------------------------------------<br>
+    <br> " . $HTTP_POST_VARS["message"] . "<br>
+    </body>
+    </html>";
+
+    mail("admin@etcaterva.com","Formulario web con asunto: ".$HTTP_POST_VARS['subject'],$cuerpo,$header);
+
+   }
+
+?>-->
+
+    	<div id="contact_us_right_coloumn">
+    		<h2>¿Quienes somos?</h2>
+            <p>Somos <b>EtCaterva</b>, grupo de creacion software. Sientete libre de contactar con nosotros!</p>
+            <p class="vCard">
+            	<img src="../static/images/icons/ico_male.png" width="16" height="16" alt="John Doe" /> <b>EtCaterva, SG</b><br />
+            	<img src="../static/images/icons/ico_home.png" width="16" height="16" alt="Address" /> Avenida de la universidad, Caceres<br />
+            	<img src="../static/images/icons/ico_mail.png" width="16" height="16" alt="Email" /> <a href="mailto:moonbox@domain.com">admin@etcaterva.com</a>
+            </p>
+            <div class="dotted_line_short"></div>
+            <h2>Nuestra localizacion</h2>
+            <img src="../static/images/map.png" width="280" height="400" alt="Map" class="map" />
+    	</div>
+    </div>
+    <div class="clear"></div>
+	<div class="dotted_line"></div>
+    <!-- End content -->
+
+{% endblock %}
