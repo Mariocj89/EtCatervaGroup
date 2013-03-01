@@ -17,8 +17,10 @@
 				<td width='176' valign='top'><a href='project/{{project.id}}' class='zoom'>
 				<img src='/scripts/timthumb.php?src={{project.image}}&h=100&w=176&zc=1' alt='{{project.titulo}}' border='0' />
 				</a><br />{{project.title}}, <strong>{{project.fecha}}</strong><br />
-				
-				//TODO: Users
+
+				{% for aUser in project.usuarios.all %}
+					<a href="user/{{aUser.id}}">{{aUser.baseUser.username}}</a>, 
+				{% endfor %}
 				
 				{% if forloop.counter|divisibleby:"5"  %}
             		</tr>;
