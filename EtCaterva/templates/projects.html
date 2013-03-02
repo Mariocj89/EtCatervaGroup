@@ -9,9 +9,9 @@
 
 	  		<h2>Coleccion</h2>
             <table border="	0" cellspacing="8">
-            {% for project in footer_project_list %}
+            {% for project in project_list %}
             	{% if forloop.counter|divisibleby:"5"  %}
-            		<tr>;
+            		<tr>
             	{% endif%}
 				<td width='176' valign='top'><a href='project/{{project.id}}' class='zoom'>
 				<img src='{% thumbnail project.image 176x100 crop %}' alt='{{project.titulo}}' border='0' />
@@ -22,40 +22,10 @@
 				{% endfor %}
 				
 				{% if forloop.counter|divisibleby:"5"  %}
-            		</tr>;
+            		</tr>
             	{% endif%}
     		{% endfor %}
             	
-    <!--<?php
-	$conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
-	mysql_select_db("db384496120"); 
-	$resQuery = mysql_query("Select * from Projects", $conexion) or die(mysql_error());
-	
-	for ($j = 1; $j <= 3; $j++) {
-		echo "<tr>";
-		for ($i = 1; $i <= 5; $i++) {
-				if(!($row = mysql_fetch_assoc($resQuery)))
-    			    ;/*echo "<td><a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto\" class=\"zoom\"><img src=\"images/pic1_portfolio.jpg\" alt=\"Empty\" border=\"0\" /></a><br />Empty, <strong>----</strong><br /><a href=\"#\">Empty</a></td>";*/
-				else
-				{
-					echo "";
-					echo "";
-					echo "
-					echo 
-					$users = mysql_query("Select u.iduser, u.nick from Users u, User_has_Project p2u where ".$row["idproject"]." = p2u.Projects_idproject and u.iduser = p2u.Users_iduser", $conexion);
-					$row = mysql_fetch_assoc($users);
-					echo "<a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
-					while($row = mysql_fetch_assoc($users))
-					{
-						echo ", <a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
-					}
-					echo "</td>";
-				}
-		}
-		echo "</tr>";
-	}
-    ?>-->
-
 </table>
   	  </div>
   	</div>

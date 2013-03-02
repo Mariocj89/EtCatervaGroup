@@ -6,48 +6,24 @@
     <div id="bottom_content">
 		<div id="bottom_content_left_coloumn">
 			<h2>Detalles</h2>
-			<!--<?php
-				if($_GET["id"])
-					$id = $_GET["id"];
-				else
-					{echo "Proyecto incorrecto"; die();}
-				$con = mysql_connect("db384496120.db.1and1.com","dbo384496120","1234abcd");
-				if (!$con)  {
-				  die('Could not connect: ' . mysql_error());
-				}
-				mysql_select_db("db384496120", $con);
 
-				$consulta = mysql_query("SELECT name,description,date,image,link,visits FROM Projects WHERE idproject = '$id'", $con);
-				$fila = mysql_fetch_assoc($consulta);
-				echo "<b>Nombre:</b> ".$fila["name"]."<br>";
-				echo "<b>Desde:</b> ".$fila["date"]."<br>";
-				echo "<b>Visitas:</b> ".$fila["visits"]."<br>";
-				
-				$autores = mysql_query("Select u.iduser, u.nick from Users u, User_has_Project p2u where ".$id." = p2u.Projects_idproject and u.iduser = p2u.Users_iduser", $con);
-				if (mysql_num_rows($autores) == 1)
-					echo "<b>Autor: </b>";
-				else
-					echo "<b>Autores: </b>";
-				$row = mysql_fetch_assoc($autores);
-				echo "<a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
-				while($row = mysql_fetch_assoc($autores))
-				{
-					echo ", <a href=\"user.php?id=".$row["iduser"]."\">".$row["nick"]."</a>";
-				}
-				echo "<br>";
-
-				echo "<b>Enlace:</b> <a href=".$fila["link"].">".$fila["link"]."</a><br>";
-				echo "<b>Descripcion:</b> ".$fila["description"]."<br>";
-
-
-				echo "</div>
+				<b>Nombre:</b>{{project.titulo}}<br>
+				<b>Desde:</b>{{project.fecha}}<br>
+				<b>Visitas:</b>{{project.visitas}}<br>
+				{%if project.usuarios.count == 1 %}
+					<b>Autor: </b>
+				{% else %}
+					<b>Autores: </b>
+				{% endif %}
+				{% for aUser in project.usuarios.all %}
+					<a href="/user/{{aUser.id}}">{{aUser.baseUser.username}}</a>, 
+				{% endfor %}
+				<br>
+				<b>Enlace:</b> <a href="{{project.link}}">{{project.link}}</a><br>
+				<b>Descripcion:</b>{{project.descripcion}}<br>
+				</div>
 				<div id='bottom_content_mid_coloumn'>
-				<h2>Capturas</h2><img src='images/projects/".$fila["image"]."'/>";
-
-				$new_visits=$fila["visits"]+1;
-				$update_visits = mysql_query("UPDATE Projects SET visits = '$new_visits' WHERE idproject = '$id'", $con);
-				mysql_query($update_visits,$con);
-				?>-->
+				<h2>Capturas</h2><img src='/media/{{project.image}}'/>
 			</div>
       	</div>
 

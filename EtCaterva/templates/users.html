@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load thumbnail %}
 {% block content %}
     <h1>Estos son los miembros de nuestro equipo, conocelos!.</h1>
     <div class="dotted_line"></div>
@@ -9,27 +9,17 @@
 
 	  		<h2>Equipo EtCaterva</h2>
             <table border="0" cellspacing="8">
-    <!--<?php
-	$conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
-	mysql_select_db("db384496120"); 
-	$resQuery = mysql_query("Select * from Users", $conexion) or die(mysql_error());
-	for ($j = 1; $j <= 3; $j++) {
-		echo "<tr>";
-		for ($i = 1; $i <= 5; $i++) {
-				if(!($row = mysql_fetch_assoc($resQuery)))
-    			    ;/*echo "<td><a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto\" class=\"zoom\"><img src=\"images/pic1_portfolio.jpg\" alt=\"Empty\" border=\"0\" /></a><br />Empty, <strong>----</strong><br /><a href=\"#\">Empty</a></td>";*/
-				else
-				{
-					echo "<td width='176'><a href=\"user.php?id=".$row["iduser"]."\" class=\"zoom\">";
-					echo "<img src='/scripts/timthumb.php?src=images/Users/".$row["image"]."&h=100&w=176&zc=1'";
-					echo "alt=\"".$row["nick"]."\" border=\"0\" /></a><br />".$row["nick"];
-					echo ", <strong>".substr($row['registered'],0,4)."</strong><br />";
-					echo "</td>";
-				}
-		}
-		echo "</tr>";
-	}
-    ?>-->
+            {% for usuario in user_list %}
+            	{% if forloop.counter|divisibleby:"5"  %}
+            		<tr>;
+            	{% endif%}
+				<td width='176' valign='top'><a href='user/{{usuario.id}}' class='zoom'>
+				<img src='{% thumbnail usuario.profilePicture 176x100 crop %}' alt='{{usuario.username}}' border='0' />
+				</a><br />{{usuario.baseUser.username}}, <strong>{{usuario.baseUser.date_joined.year}}</strong><br />
+				{% if forloop.counter|divisibleby:"5"  %}
+            		</tr>;
+            	{% endif%}
+    		{% endfor %}  	
 
 </table>
   	  </div>
@@ -42,19 +32,10 @@
 
     	<div id="bottom_content_left_coloumn_latest_projects">
         	<h2>Ultimos Usuarios</h2>
-   <!-- <?php
-	$resQuery = mysql_query("Select * from Users ORDER BY registered DESC", $conexion) or die(mysql_error());
-	for ($j = 1; $j <= 6; $j++) {
-			if(!($row = mysql_fetch_assoc($resQuery)))
-   			    ;/*echo "<a href=\"images/pic1_big.jpg\" rel=\"prettyPhoto[pp_gal]\"><img src=\"images/pic2.jpg\" width=\"88\" height=\"88\" alt=\"pic2\" border=\"0\" /></a>";*/
-			else
-			{
-				echo "<a href=\"user.php?id=".$row["iduser"]."\" title=\"".$row["nick"]."\">";
-				echo "<img src='/scripts/timthumb.php?src=images/Users/".$row["image"]."&h=88&w=88&zc=1' width=\"88\" height=\"88\" alt=\"".$row["nick"]."\" border=\"0\" /></a>";
-			}
-	}
-	mysql_close($conexion);
-    ?>-->	
+        	{% for usuario in footer_user_list %}
+				<a href='user/{{ usuario.id }}' title='{{ usuario.username }}'>
+				<img src='{% thumbnail usuario.profilePicture 88x88 crop %}' width='88' height='88' alt='{{ usuario.username }}' border='0' /></a>
+    		{% endfor %}
         </div>
 		<div id="bottom_content_mid_coloumn">
         	<h2>Contacta</h2>
