@@ -1,5 +1,5 @@
-from django.conf.urls import patterns, include, url
-from os import path
+from django.conf.urls import patterns, url
+
 
 urlpatterns = patterns('EtCaterva.views',
     url(r'^$', 'home', name='home'),
@@ -8,5 +8,5 @@ urlpatterns = patterns('EtCaterva.views',
     url(r'^projects$', 'projects', name='projects'),
     url(r'^project$', 'project', name='project'),
     url(r'^user$', 'user', name='user'),
-    url(r'^users$', 'users', name='users'),                    
+    url(r'^users$', 'users', name='users'),           
 )

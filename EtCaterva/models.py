@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.datetime_safe import datetime
 from django.core.files.storage import FileSystemStorage
+from EtCatervaGroup.settings import MEDIA_ROOT
 
-mfs = FileSystemStorage('E:/Mis Documentos/workspace/Django/EtCatervaGroup/EtCaterva/media')
+mfs = FileSystemStorage(MEDIA_ROOT)
 
 # Create your models here.
 class Usuario(models.Model):

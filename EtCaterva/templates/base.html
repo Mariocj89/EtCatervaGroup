@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load thumbnail %}
 {% load url from future %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -6,22 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>EtCaterva | Software Group</title>
 <!-- Link to the site's main CSS style -->
-<link rel="stylesheet" type="text/css" media="screen" href="../static/css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />
 <!-- Link to the Superfish menu CSS style -->
-<link rel="stylesheet" type="text/css" media="screen" href="../static/css/superfish.css" /> 
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/superfish.css" /> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <!-- Cufon scripts -->
-<script type="text/javascript" src="../static/js/cufon-yui.js"></script>  
-<script type="text/javascript" src="../static/js/ScriptMT_700.font.js"></script>
-<script type="text/javascript" src="../static/js/Androgyne_400.font.js"></script>
+<script type="text/javascript" src="/static/js/cufon-yui.js"></script>  
+<script type="text/javascript" src="/static/js/ScriptMT_700.font.js"></script>
+<script type="text/javascript" src="/static/js/Androgyne_400.font.js"></script>
 <!-- Superfish scripts -->
-<script type="text/javascript" src="../static/js/hoverIntent.js"></script> 
-<script type="text/javascript" src="../static/js/superfish.js"></script> 
+<script type="text/javascript" src="/static/js/hoverIntent.js"></script> 
+<script type="text/javascript" src="/static/js/superfish.js"></script> 
 <!-- Custom JS script -->
-<script src="../static/js/custom.js" type="text/javascript"></script> 
+<script src="/static/js/custom.js" type="text/javascript"></script> 
 <!-- Define which elements should be replaced with Cufon -->
 <script type="text/javascript">  
 	Cufon.replace('#header #right_section ul.top_navigation li a.menulink', { fontFamily: 'Androgyne', hover: 'true', textShadow: '1px 1px 1px #fff' });
@@ -46,7 +47,7 @@
 	<!-- Begin header -->
 <div id="header">
     	<div id="left_section">
-        	<a href="{% url 'home' %}"><img src="../static/images/logo.png" width="349" height="130" border="0" alt="EtCaterva logo" class="logo" /></a>
+        	<a href="{% url 'home' %}"><img src="/static/images/logo.png" width="349" height="130" border="0" alt="EtCaterva logo" class="logo" /></a>
         </div>
         <div id="right_section">
         	<ul class="top_navigation">
@@ -64,17 +65,17 @@
     <!-- Begin footer -->
     <div id="footer">
     	<div id="footer_left_coloumn">
-        	<img src="../static/images/footer_logo.png" width="222" height="34" alt="Footer Logo" />
+        	<img src="/static/images/footer_logo.png" width="222" height="34" alt="Footer Logo" />
         </div>
         <div id="footer_mid_coloumn">
         	<ul>
-            	<li><a href="https://www.facebook.com/pages/EtCaterva/254267391304775"><img src="../static/images/icons/facebook_32.png" width="32" height="32" alt="Facebook icon" border="0" /></a></li>
-                <li><a href="http://www.youtube.com/user/EtCaterva"><img src="../static/images/icons/youtube.png" width="32" height="32" alt="Youtube icon" border="0" /></a></li>
-                <li><a href="https://twitter.com/#!/etcaterva"><img src="../static/images/icons/twitter_32.png" width="32" height="32" alt="Twitter icon" border="0" /></a></li>
+            	<li><a href="https://www.facebook.com/pages/EtCaterva/254267391304775"><img src="/static/images/icons/facebook_32.png" width="32" height="32" alt="Facebook icon" border="0" /></a></li>
+                <li><a href="http://www.youtube.com/user/EtCaterva"><img src="/static/images/icons/youtube.png" width="32" height="32" alt="Youtube icon" border="0" /></a></li>
+                <li><a href="https://twitter.com/#!/etcaterva"><img src="/static/images/icons/twitter_32.png" width="32" height="32" alt="Twitter icon" border="0" /></a></li>
             </ul>
         </div>
         <div id="footer_right_coloumn">
-        	<img src="../static/images/footer_all_rights_reserved.png" width="229" height="23" alt="All rights reserved" />
+        	<img src="/static/images/footer_all_rights_reserved.png" width="229" height="23" alt="All rights reserved" />
         </div>
     </div>
     <!-- End footer -->
