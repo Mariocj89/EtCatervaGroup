@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load thumbnail %}
 {% block extraJS %}
 <!-- Link to the Nivo Slider CSS style -->
 <link rel="stylesheet" type="text/css" media="screen" href="/static/css/nivo-slider.css"  />
@@ -32,15 +32,10 @@ $(window).load(function() {
 {% endblock %}{% block content %}
     <!-- Begin slider -->
     <div id="slider">
-   	  <img src="/static/images/slideshow/slides/slide2.png" alt="slide2"  />
-   	  <img src="/static/images/slideshow/slides/slide3.png" alt="slide3"  />
-   	  <img src="/static/images/slideshow/slides/slide4.png" alt="slide4" />
+      {%for slider in sliders%}
+      <img src="/media/{{slider.image}}" alt="{{slider.titulo}}"  />
+   	  {%endfor%}
 	</div>
-    <!-- Begin captions -->
-	<div id="htmlcaption" class="nivo-html-caption">
-    	<strong>Este</strong> es un ejemplo de slide <em>HTML</em> con <a href="#">una referencia</a>.
-	</div>
-    <!-- End captions -->
     <!-- Begin control bar -->
   	<div id="control_bar"></div>
     <!-- End control bar -->
@@ -52,41 +47,17 @@ $(window).load(function() {
     	<div id="top_content_left_coloumn">
 		<div id="accordion" style='margin-top:20px'>
  <!-- Parte encargada de mostrar las noticias de la base de datos de manera ordenada -->
-   <!--<?php
-
-   $conexion = mysql_connect("db384496120.db.1and1.com", "dbo384496120", "1234abcd");
-   mysql_select_db("db384496120");
-   $RQuery = mysql_query("Select * from News ORDER BY date DESC", $conexion) or die(mysql_error());
-
-    while($row = mysql_fetch_assoc($RQuery)){
-
-	echo "<h5><a href='#'>".$row["title"]."</a></h5>";
-        echo "<div><p class='top_content_text'>".nl2br($row["text"])."</p></div>";
-    }
-
-    ?>-->
-
+   {%for noticia in noticias%}
+   		<h5><a href='#'>{{noticia.titulo}}</a></h5>
+        <div><p class='top_content_text'>{{noticia.content}}</p></div>
+   {%endfor%}
 	    </div>
         </div>
         <div id="top_content_right_coloumn">
         	<h2>Proyectos recientes</h2>
-
-
- <!-- Parte encargada de mostrar los proyectos mas recientes -->
-   <!--<?php
-
-   $RQuery = mysql_query("SELECT * FROM Projects ORDER BY date DESC LIMIT 9", $conexion) or die(mysql_error());
-
-    while($row = mysql_fetch_assoc($RQuery)){
-
-    $image= $row['image'];
-
-    if($image == "") $image = "pic2.jpg";
-    echo "<a href='project.php?id=".$row["idproject"]."'><img src='/scripts/timthumb.php?src=images/Projects/".$image."&h=88&w=88&zc=1' border='0'/></a>";
-
-    }
-
-    ?>-->
+	{%for proyecto in proyectos %}
+		<a href='project/{{proyecto.pk}}/'><img src='{% thumbnail proyecto.image 88x88 crop %}' border='0'/></a>
+	{%endfor%}
 
     </div>
     </div>
@@ -97,19 +68,7 @@ $(window).load(function() {
     <div id="bottom_content">
     	<div id="bottom_content_left_coloumn">
         	<h2>Usuario aleatorio</h2>
-			
-			 <!--<?php
-
-				$RQuery = mysql_query("SELECT * FROM Users ORDER BY RAND()", $conexion) or die(mysql_error());
-
-				$row = mysql_fetch_assoc($RQuery);
-				$image = $row['image'];
-				
-				if($image == NULL) $image = "pic7.jpg";
-				echo "<p class='bottom_content_text'><a href='user.php?id=".$row['iduser']."'><img src='/scripts/timthumb.php?src=/images/Users/".$image."&h=80&w=80&zc=1' alt=''/></a>".$row['descr']."</p>";	
-
-    ?>-->
-			
+			<p class='bottom_content_text'><a href='user/{{randomUser.0.pk}}/'><img src='{% thumbnail randomUser.0.profilePicture 80x80 crop %}' alt=''/></a>{{randomUser.0.description}}</p>
         </div>
         <div id="bottom_content_mid_coloumn" class="fb-like-box" data-href="https://www.facebook.com/pages/EtCaterva/254267391304775" data-width="300" data-show-faces="true" data-stream="false" data-header="false">
       	</div>

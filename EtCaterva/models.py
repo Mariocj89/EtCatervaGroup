@@ -7,12 +7,18 @@ from EtCatervaGroup.settings import MEDIA_ROOT
 mfs = FileSystemStorage(MEDIA_ROOT)
 
 # Create your models here.
+class Slider(models.Model):
+    image = models.ImageField(storage=mfs,upload_to='sliders')
+    titulo = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.titulo    
+
 class Usuario(models.Model):
     """Usuario personalizado para EtCaterva"""
     baseUser = models.OneToOneField(User)
     birthDate = models.DateField()
-    profilePicture = models.ImageField(storage=mfs,upload_to='userAvatar',blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    profilePicture = models.ImageField(storage=mfs,upload_to='userAvatar')
+    description = models.TextField()
     
     facebook = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
@@ -37,7 +43,7 @@ class Proyecto(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
     fecha = models.DateField(default=datetime.today())
-    image = models.ImageField(storage=mfs,upload_to='projectPic',blank=True, null=True)
+    image = models.ImageField(storage=mfs,upload_to='projectPic')
     visitas = models.PositiveIntegerField(default=0)
     link = models.URLField(blank=True, null=True)
     usuarios = models.ManyToManyField('Usuario')

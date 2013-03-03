@@ -1,4 +1,5 @@
 # Django settings for EtCatervaGroup project.
+#encoding:utf-8
 import os
 
 DEBUG = True
