@@ -41,11 +41,17 @@ class Project(models.Model):
     strengths = models.ManyToManyField(Strength)
     weaknesses = models.ManyToManyField(Weakness)
     questions = models.ManyToManyField(Usuario,related_name="questioned_at",through="Question")
-    #link to Comments?
+    #link to Comments
     
     def __unicode__(self):
         return self.title
 
+
+class Comment(models.Model):
+    text = models.CharField(_("comment"),max_length=50)
+    project = models.ForeignKey(Project)
+    def __unicode__(self):
+        return self.text    
 
 class Question(models.Model):
     text = models.CharField(_("question"),max_length=2000)
