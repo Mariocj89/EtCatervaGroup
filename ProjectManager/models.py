@@ -12,8 +12,8 @@ VOTE_TYPE = (
 )
 
 REQUEST_TYPE = (
-        ("1","participant"),
-        ("2","owner"), 
+        ("1",_("participant")),
+        ("2",_("owner")), 
 )
 
 class Strength(models.Model):
@@ -32,7 +32,7 @@ class Project(models.Model):
     title = models.CharField(_("title"),max_length=50)
     priority = models.DecimalField(_("priority"),max_digits = 3, decimal_places=2, blank=True)
     date_created = models.DateField(_("creation date"), default=datetime.date.today)
-    date_start = models.DateField(_("start date"), default=(datetime.date.today() + timedelta(days=30)))
+    date_start = models.DateField(_("start date"), default=(datetime.date.today() + timedelta(days=30)), null=True, blank=True)
 
     owners = models.ManyToManyField(Usuario,related_name="owner_of")
     participants = models.ManyToManyField(Usuario,related_name="participate_in")
@@ -68,7 +68,7 @@ class Answer(models.Model):
         return "[A:"+self.user+"->"+self.question.project+"]:"+self.text     
 
 class Vote(models.Model):
-    type = models.CharField(_("type"),max_length=5,choices = VOTE_TYPE)
+    typeV = models.CharField(_("type"),max_length=5,choices = VOTE_TYPE)
     project = models.ForeignKey(Project)
     user = models.ForeignKey(Usuario)
     def __unicode__(self):
@@ -77,7 +77,7 @@ class Vote(models.Model):
     
 class JoinRequest(models.Model):
     date = models.DateField(_("request date"), default=datetime.date.today)
-    type = models.CharField(_("type"),max_length=5,choices = REQUEST_TYPE)
+    typeJ = models.CharField(_("type"),max_length=5,choices = REQUEST_TYPE)
     project = models.ForeignKey(Project)
     user = models.ForeignKey(Usuario)
     def __unicode__(self):
