@@ -7,6 +7,12 @@ from EtCatervaGroup.settings import MEDIA_ROOT
 mfs = FileSystemStorage(MEDIA_ROOT)
 
 # Create your models here.
+class KeyWord(models.Model):
+    """Key words para asociar por categoria. Ej:C++"""
+    word = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.word
+    
 class Slider(models.Model):
     image = models.ImageField(storage=mfs,upload_to='sliders')
     titulo = models.CharField(max_length=100)
@@ -19,6 +25,7 @@ class Usuario(models.Model):
     birthDate = models.DateField()
     profilePicture = models.ImageField(storage=mfs,upload_to='userAvatar')
     description = models.TextField()
+    keyWords = models.ManyToManyField(KeyWord)
     
     facebook = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
@@ -47,8 +54,8 @@ class Proyecto(models.Model):
     visitas = models.PositiveIntegerField(default=0)
     link = models.URLField(blank=True, null=True)
     usuarios = models.ManyToManyField('Usuario')
+    keyWords = models.ManyToManyField(KeyWord)
     def __unicode__(self):
         return self.titulo
-    
     
     

@@ -52,6 +52,11 @@
         <div id="right_section">
         	<ul class="top_navigation">
             	<li><a class="menulink" href="{% url 'etCaterva/home' %}">home</a></li>
+            	{% if 	user.is_authenticated %}
+				<li><a class="menulink" href="/admin/">admin</a></li>
+            	{% else %}
+            	<li><a class="menulink" href="/admin/">log in</a></li>
+            	{% endif %}
                 <li><a class="menulink" href="{% url 'etCaterva/users' %}">usuarios</a></li>
                 <li><a class="menulink" href="{% url 'etCaterva/projects' %}">proyectos</a></li>
                 <li><a class="menulink" href="{% url 'etCaterva/contact' %}">contacto</a></li>

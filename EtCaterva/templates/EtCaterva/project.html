@@ -21,9 +21,12 @@
 				<br>
 				<b>Enlace:</b> <a href="{{project.link}}">{{project.link}}</a><br>
 				<b>Descripcion:</b>{{project.descripcion}}<br>
-				</div>
-				<div id='bottom_content_mid_coloumn'>
-				<h2>Capturas</h2><img src='/media/{{project.image}}'/>
+				{% if 	user.is_authenticated %}
+					<b>KeyWords:</b>{% for aKW in project.keyWords.all %}{{aKW.word}},{% endfor %}<br>
+					</div>
+					<div id='bottom_content_mid_coloumn'>
+					<h2>Capturas</h2><img src='/media/{{project.image}}'/>
+				{% endif %}
 			</div>
       	</div>
 

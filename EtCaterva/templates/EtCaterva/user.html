@@ -71,6 +71,14 @@
 				{% for aProj in proyectosV %}
 					<a href='/project/{{aProj.pk}}'> {{aProj.titulo}}</a>, 
 				{% endfor %}
+				{% if 	user.is_authenticated %}
+					<tr><td colspan='2' align='center'><b>KeyWords:</b>
+						<tr><td colspan='2'>
+					{% for aKW in usuario.keyWords.all %}
+						{{aKW.word}}, 
+					{% endfor %}		
+				{% endif %}					
+				
 			</table>
 		</div>
     </div>
