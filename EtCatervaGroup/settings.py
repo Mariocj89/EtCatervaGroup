@@ -2,13 +2,13 @@
 #encoding:utf-8
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.dirname(__file__)+"/../"
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Admin', 'admin@etcaterva.com'),
 )
 
 MANAGERS = ADMINS
