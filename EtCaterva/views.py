@@ -53,13 +53,15 @@ def projects(request):
     return render_to_response("EtCaterva/projects.html", {'project_list':Proyecto.objects.all(),'footer_project_list':Proyecto.objects.order_by('visitas')[:6], 'user':request.user})
 
 def user(request,userid = 0):
+    pVisitas = pProyectos = 0
     aUser = Usuario.objects.get(pk=userid)
     edad = datetime.date.today() - aUser.birthDate
     proyectos = Proyecto.objects.filter(usuarios=aUser.pk).order_by('fecha')
     proyectosV = Proyecto.objects.filter(usuarios=aUser.pk).order_by('visitas')
     noticias = Noticia.objects.filter(usuario=aUser.pk).order_by('fecha')
-    pVisitas = Proyecto.objects.filter(usuarios=aUser.pk).aggregate(Sum('visitas'))['visitas__sum']*100 / Proyecto.objects.aggregate(Sum('visitas'))['visitas__sum']
-    pProyectos = Proyecto.objects.filter(usuarios=aUser.pk).count()*100 / Proyecto.objects.count()
+    if Proyecto.objects.filter(usuarios=aUser.pk):
+        pVisitas = Proyecto.objects.filter(usuarios=aUser.pk).aggregate(Sum('visitas'))['visitas__sum']*100 / Proyecto.objects.aggregate(Sum('visitas'))['visitas__sum']
+        pProyectos = Proyecto.objects.filter(usuarios=aUser.pk).count()*100 / Proyecto.objects.count()
     return render_to_response("EtCaterva/user.html", {'usuario' : aUser, 'proyectos':proyectos,'proyectosV':proyectosV,'noticias':noticias, 'edad' : edad.days/365, 'pVisitas' : pVisitas, 'pProyectos': pProyectos, 'user':request.user})
 
 def users(request):

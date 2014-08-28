@@ -1,5 +1,6 @@
 {% extends "EtCaterva/base.html" %}
 {% load thumbnail %}
+{% load url from future %}
 {% block extraJS %}
 <!-- Link to the Nivo Slider CSS style -->
 <link rel="stylesheet" type="text/css" media="screen" href="/static/css/nivo-slider.css"  />
@@ -56,7 +57,7 @@ $(window).load(function() {
         <div id="top_content_right_coloumn">
         	<h2>Proyectos recientes</h2>
 	{%for proyecto in proyectos %}
-		<a href='project/{{proyecto.pk}}/'><img src='{% thumbnail proyecto.image 88x88 crop %}' border='0'/></a>
+		<a href="{% url 'etCaterva/project' proyecto.pk %}"><img src='{% thumbnail proyecto.image 88x88 crop %}' border='0'/></a>
 	{%endfor%}
 
     </div>
@@ -65,11 +66,13 @@ $(window).load(function() {
     <div class="clear"></div>
     <div class="dotted_line" style='margin-top:20px'></div>
     <!-- Begin bottom content -->
+    {% if randomUser %}
     <div id="bottom_content">
     	<div id="bottom_content_left_coloumn">
         	<h2>Usuario aleatorio</h2>
-			<p class='bottom_content_text'><a href='user/{{randomUser.0.pk}}/'><img src='{% thumbnail randomUser.0.profilePicture 80x80 crop %}' alt=''/></a>{{randomUser.0.description}}</p>
+			<p class='bottom_content_text'><a href="{% url 'etCaterva/user' randomUser.0.pk %}"><img src='{% thumbnail randomUser.0.profilePicture 80x80 crop %}' alt=''/></a>{{randomUser.0.description}}</p>
         </div>
+        {% endif %}
         <div id="bottom_content_mid_coloumn" class="fb-like-box" data-href="https://www.facebook.com/pages/EtCaterva/254267391304775" data-width="300" data-show-faces="true" data-stream="false" data-header="false">
       	</div>
 		<div id="bottom_content_right_coloumn">

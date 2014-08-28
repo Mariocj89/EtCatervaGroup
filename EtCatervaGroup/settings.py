@@ -2,7 +2,7 @@
 #encoding:utf-8
 import os
 
-DEBUG = False
+DEBUG = True#False
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.dirname(__file__)+"/../"
@@ -49,7 +49,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'EtCaterva/media/')
+MEDIA_ROOT = '/data/apache/serve/etcaterva/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -60,7 +60,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
+STATIC_ROOT = '/data/apache/serve/etcaterva/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -128,7 +128,21 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'EtCaterva',
     'easy_thumbnails',
+    'django_jenkins',
 )
+JENKINS_TASKS = (
+    #'django_jenkins.tasks.run_flake8',
+    #'django_jenkins.tasks.run_jshint',
+    #'django_jenkins.tasks.run_csslint',
+    #'django_jenkins.tasks.run_pylint',
+    #'django_jenkins.tasks.with_coverage',
+    'django_jenkins.tasks.django_tests',   # select one django or
+    #'django_jenkins.tasks.run_pep8',
+    #'django_jenkins.tasks.run_pyflakes',
+    #'django_jenkins.tasks.run_sloccount',
+    #'django_jenkins.tasks.lettuce_tests',
+)
+PROJECT_APPS=('EtCaterva',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

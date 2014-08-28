@@ -1,5 +1,6 @@
 {% extends "EtCaterva/base.html" %}
 {% load thumbnail %}
+{% load url from future %}
 {% block content %}
     <h1>Esta es nuestra <span style="color:#08a5ff;">coleccion software</span>, disfrutala!.</h1>
     <div class="dotted_line"></div>
@@ -13,16 +14,15 @@
             	{% if forloop.counter|divisibleby:"5"  %}
             		<tr>
             	{% endif%}
-				<td width='176' valign='top'><a href='project/{{project.id}}' class='zoom'>
-				<img src='{% thumbnail project.image 176x100 crop %}' alt='{{project.titulo}}' border='0' />
+				<td width='176' valign='top'><a href="{% url 'etCaterva/project' project.id %}" class='zoom'>
+				<img src='{% thumbnail project.image 176x100 crop %}' alt='{{project.titulo}}' border='0' width="176" height="100"/>
 				</a><br />{{project.titulo}}, <strong>{{project.fecha.year}}</strong><br />
 
 				{% for aUser in project.usuarios.all %}
-					<a href="user/{{aUser.id}}">{{aUser.baseUser.username}}</a>, 
+					<a href="{% url 'etCaterva/user' aUser.id %}">{{aUser.baseUser.username}}</a>, 
 				{% endfor %}
 				
-				{% if forloop.counter|divisibleby:"5"  %}
-            		</tr>
+				{% if forloop.counter|divisibleby:"500"  %}
             	{% endif%}
     		{% endfor %}
             	
@@ -38,7 +38,7 @@
     	<div id="bottom_content_left_coloumn_latest_projects">
         	<h2>Proyectos mas visitados</h2>
         	{% for project in footer_project_list %}
-				<a href='project/{{ project.id }}' title='{{ project.titulo }}'>
+				<a href="{% url 'etCaterva/project' project.id %}" title='{{ project.titulo }}'>
 				<img src='{% thumbnail project.image 88x88 crop %}' width='88' height='88' alt='{{ project.titulo }}' border='0' /></a>
     		{% endfor %}
         </div>

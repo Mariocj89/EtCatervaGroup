@@ -1,5 +1,6 @@
 {% extends "EtCaterva/base.html" %}
 {% load thumbnail %}
+{% load url from future %}
 {% block content %}
     <h1>Estos son los miembros de nuestro equipo, conocelos!.</h1>
     <div class="dotted_line"></div>
@@ -13,7 +14,7 @@
             	{% if forloop.counter|divisibleby:"5"  %}
             		<tr>;
             	{% endif%}
-				<td width='176' valign='top'><a href='user/{{usuario.id}}' class='zoom'>
+				<td width='176' valign='top'><a href="{% url 'etCaterva/user' usuario.id %}" class='zoom'>
 				<img src='{% thumbnail usuario.profilePicture 176x100 crop %}' alt='{{usuario.username}}' border='0' />
 				</a><br />{{usuario.baseUser.username}}, <strong>{{usuario.baseUser.date_joined.year}}</strong><br />
 				{% if forloop.counter|divisibleby:"5"  %}
@@ -33,7 +34,7 @@
     	<div id="bottom_content_left_coloumn_latest_projects">
         	<h2>Ultimos Usuarios</h2>
         	{% for usuario in footer_user_list %}
-				<a href='user/{{ usuario.id }}' title='{{ usuario.username }}'>
+				<a href="{% url 'etCaterva/user' usuario.id %}" title='{{ usuario.username }}'>
 				<img src='{% thumbnail usuario.profilePicture 88x88 crop %}' width='88' height='88' alt='{{ usuario.username }}' border='0' /></a>
     		{% endfor %}
         </div>

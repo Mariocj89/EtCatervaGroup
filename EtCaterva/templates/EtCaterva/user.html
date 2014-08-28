@@ -1,5 +1,6 @@
 {% extends "EtCaterva/base.html" %}
 {% load thumbnail %}
+{% load url from future %}
 {% block content %}
 	<style type="text/css">
 	#box{width:180px;border:1px solid #000;height:17px;}
@@ -62,14 +63,16 @@
 					<table border='0' cellpadding='5' cellspacing=''>
 					<tr><td align='right'><b>Num. Proyectos:</b><td>{{proyectos.count}}
 					<tr><td align='right'><b>Num. Noticias:</b><td>{{noticias.count}}
-				<tr><td align='right'><b>Ultima Noticia:</b><td>{{noticias.0.titulo}}	
-				<tr><td align='right'><b>Ultimo Proyecto:</b><td><a href='/project/{{proyectos.0.pk}}'> {{proyectos.0.titulo}}</a>
+				<tr><td align='right'><b>Ultima Noticia:</b><td>{{noticias.0.titulo}}
+				{% if   proyectos %}	
+				<tr><td align='right'><b>Ultimo Proyecto:</b><td><a href="{% url 'etCaterva/project' proyectos.0.pk %}"> {{proyectos.0.titulo}}</a>
 				<tr><td align='right'><b>Fecha Ult. Proyecto:</b><td>{{proyectos.0.fecha|date:"d M Y"}}
-				<tr><td align='right'><b>Proyecto mas visitado:</b><td><a href='/project/{{proyectosV.0.pk}}'>{{proyectosV.0.titulo}}</a>
+				<tr><td align='right'><b>Proyecto mas visitado:</b><td><a href="{% url 'etCaterva/project' proyectosV.0.pk %}">{{proyectosV.0.titulo}}</a>
+				{% endif %}
 				<tr><td colspan='2' align='center'><b>Proyectos:</b>
 					<tr><td colspan='2'>
 				{% for aProj in proyectosV %}
-					<a href='/project/{{aProj.pk}}'> {{aProj.titulo}}</a>, 
+					<a href="{% url 'etCaterva/project' aProj.pk %}"> {{aProj.titulo}}</a>, 
 				{% endfor %}
 				{% if 	user.is_authenticated %}
 					<tr><td colspan='2' align='center'><b>KeyWords:</b>

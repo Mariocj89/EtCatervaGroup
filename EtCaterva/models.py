@@ -25,7 +25,7 @@ class Usuario(models.Model):
     birthDate = models.DateField()
     profilePicture = models.ImageField(storage=mfs,upload_to='userAvatar')
     description = models.TextField()
-    keyWords = models.ManyToManyField(KeyWord)
+    keyWords = models.ManyToManyField(KeyWord,blank=True, null=True)
     
     facebook = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
@@ -37,7 +37,7 @@ class Usuario(models.Model):
     
 class Noticia(models.Model):
     """Noticia en la Web"""
-    usuario = models.ForeignKey(Usuario,unique=True)
+    usuario = models.ForeignKey(Usuario)
     fecha = models.DateField(default=datetime.today())
     titulo = models.CharField(max_length=100)
     content = models.TextField()
@@ -51,6 +51,7 @@ class Proyecto(models.Model):
     descripcion = models.TextField()
     fecha = models.DateField(default=datetime.today())
     image = models.ImageField(storage=mfs,upload_to='projectPic')
+    file = models.FileField(storage=mfs,upload_to='projectFiles',blank=True, null=True)
     visitas = models.PositiveIntegerField(default=0)
     link = models.URLField(blank=True, null=True)
     usuarios = models.ManyToManyField('Usuario')
